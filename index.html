@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aryan Gupta – Cyber Security Graduate</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #21262d;
+    --accent: #58a6ff;
+    --accent2: #3fb950;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --tag-bg: #1f2937;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    --font-body: 'Inter', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* TERMINAL HEADER */
+  .terminal {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.red { background: #ff5f57; }
+  .dot.yellow { background: #febc2e; }
+  .dot.green { background: #28c840; }
+
+  .terminal-title {
+    flex: 1;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .terminal-prompt {
+    padding: 12px 20px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .terminal-prompt .ps1 { color: var(--accent2); }
+  .terminal-prompt .cmd { color: var(--text); }
+  .terminal-prompt .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--accent);
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* HERO */
+  .hero {
+    margin-bottom: 48px;
+    border-left: 3px solid var(--accent);
+    padding-left: 20px;
+  }
+
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .badge {
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .badge.highlight { border-color: var(--accent); color: var(--accent); }
+  .badge.green { border-color: var(--accent2); color: var(--accent2); }
+
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .contact-row span::before { margin-right: 4px; }
+
+  /* SECTIONS */
+  .section { margin-bottom: 48px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .section-header h2 {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ENTRIES */
+  .entry {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+
+  .entry:hover { border-color: var(--accent); }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+
+  .entry-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+  }
+
+  .entry-date {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .entry-sub {
+    font-size: 13px;
+    color: var(--accent2);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+
+  .entry ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .entry ul li {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 2px 0 2px 16px;
+    position: relative;
+  }
+
+  .entry ul li::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* SKILLS GRID */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+
+  .skill-card h3 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* CERTS */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+  }
+
+  .cert-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+
+  /* REFS */
+  .refs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  .ref-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+
+  .ref-name { font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .ref-role { font-size: 13px; color: var(--accent2); margin-bottom: 6px; }
+  .ref-contact { font-size: 12px; color: var(--muted); font-family: var(--font-mono); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.8rem; }
+    .container { padding: 24px 16px 60px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TERMINAL BAR -->
+<div class="terminal">
+  <div class="terminal-bar">
+    <div class="dot red"></div>
+    <div class="dot yellow"></div>
+    <div class="dot green"></div>
+    <div class="terminal-title">aryan-gupta — cv — zsh</div>
+  </div>
+  <div class="terminal-prompt">
+    <span class="ps1">strawhataza@kali:~$</span>
+    <span class="cmd"> cat cv.md</span>
+    <span class="cursor"></span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-label">// whoami</div>
+    <h1>Aryan Gupta</h1>
+    <p class="hero-sub">Cyber Security Graduate &nbsp;·&nbsp; SOC &nbsp;·&nbsp; Penetration Testing &nbsp;·&nbsp; IT Support</p>
+    <div class="hero-badges">
+      <span class="badge highlight">First Class Honours (74.56%)</span>
+      <span class="badge green">BSc Cyber Security – BCU 2026</span>
+      <span class="badge">Ethical Hacker</span>
+      <span class="badge">CCNA</span>
+      <span class="badge">iMeta L3 Complete</span>
+    </div>
+    <div class="contact-row">
+      <span>📍 Willenhall, West Midlands</span>
+      <span>📞 07359 159 353</span>
+      <span>✉️ <a href="mailto:aryanguptas93@gmail.com">aryanguptas93@gmail.com</a></span>
+      <span>🔗 <a href="https://linkedin.com/in/aryan-gupta-260b72195" target="_blank">LinkedIn</a></span>
+      <span>🐱 <a href="https://github.com/StrawHat-Aza" target="_blank">GitHub</a></span>
+    </div>
+  </div>
+
+  <!-- KEY SKILLS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Security Operations</h3>
+        <div class="skill-tags">
+          <span class="tag">Wazuh</span><span class="tag">Sysmon</span><span class="tag">TheHive</span>
+          <span class="tag">SIEM</span><span class="tag">EDR</span><span class="tag">MITRE ATT&CK</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Penetration Testing</h3>
+        <div class="skill-tags">
+          <span class="tag">Kali Linux</span><span class="tag">Metasploit</span><span class="tag">Burp Suite</span>
+          <span class="tag">Nmap</span><span class="tag">Chisel</span><span class="tag">OWASP Top 10</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Vulnerability Assessment</h3>
+        <div class="skill-tags">
+          <span class="tag">OpenVAS</span><span class="tag">Nessus</span><span class="tag">OWASP ZAP</span>
+          <span class="tag">Wireshark</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Digital Forensics</h3>
+        <div class="skill-tags">
+          <span class="tag">FTK Imager</span><span class="tag">Autopsy</span><span class="tag">Registry Explorer</span>
+          <span class="tag">HxD</span><span class="tag">ACPO Guidelines</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>IT Support &amp; Admin</h3>
+        <div class="skill-tags">
+          <span class="tag">Windows 10/11</span><span class="tag">M365</span><span class="tag">Active Directory</span>
+          <span class="tag">Group Policy</span><span class="tag">Entra ID</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Dev &amp; Automation</h3>
+        <div class="skill-tags">
+          <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">PowerShell</span>
+          <span class="tag">Docker</span><span class="tag">REST APIs</span><span class="tag">Git</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERSONAL PROJECTS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// projects</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">SOC Home Lab</span>
+        <span class="entry-date">2025</span>
+      </div>
+      <div class="entry-sub">Wazuh 4.12 · Sysmon · TheHive 5.5 · Docker · Vultr Ubuntu 24.04</div>
+      <ul>
+        <li>Deployed Wazuh 4.12 for SIEM and EDR, Sysmon with Olaf Hartong sysmon-modular config for Windows event telemetry, and TheHive 5.5 via Docker for case management on Vultr cloud infrastructure</li>
+        <li>Configured detection rules, log ingestion pipelines and alert use cases from scratch</li>
+        <li>Full setup documented on GitHub: <a href="https://github.com/StrawHat-Aza/soc-home-lab" target="_blank">github.com/StrawHat-Aza/soc-home-lab</a></li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Nayra.exe – Windows Automation Tool</span>
+        <span class="entry-date">2025</span>
+      </div>
+      <div class="entry-sub">Python · Windows API · PowerShell · Registry</div>
+      <ul>
+        <li>UAC elevation via ctypes, Windows Registry manipulation, PowerShell WinRT API integration and file magic byte validation</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Jarvis – AI Terminal Assistant</span>
+        <span class="entry-date">2025</span>
+      </div>
+      <div class="entry-sub">macOS · zsh · Ollama</div>
+      <ul>
+        <li>Local LLM terminal assistant with command confirmation before execution and automated shell history sanitisation</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ACADEMIC PROJECTS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// academic projects</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Honours Project – Automated Web Vulnerability Scanner</span>
+        <span class="entry-date">2024 – 2026</span>
+      </div>
+      <div class="entry-sub">Python · Flask · OWASP ZAP API · Docker Compose</div>
+      <ul>
+        <li>Full-stack automated scanning platform with risk-categorised dashboard, Docker Compose deployment and full documentation</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Ethical Hacking CTF – Multi-Tier Penetration Test</span>
+        <span class="entry-date">2024 – 2025</span>
+      </div>
+      <div class="entry-sub">Kali Linux · Metasploit · Chisel · Burp Suite · Nmap</div>
+      <ul>
+        <li>Exploited six vulnerabilities across DMZ, Corporate and Restricted segments including PHP RCE, SSTI and IDOR</li>
+        <li>Pivoted between tiers via credential harvesting and Chisel SOCKS tunnelling, extracting CI/CD secrets from restricted Gitea instance</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Digital Forensic Investigation</span>
+        <span class="entry-date">2024</span>
+      </div>
+      <div class="entry-sub">FTK Imager · Autopsy · Registry Explorer · HxD</div>
+      <ul>
+        <li>Full forensic acquisition and analysis following ACPO guidelines with chain of custody and formal investigation report</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Multi-Site Network Infrastructure Design</span>
+        <span class="entry-date">2024</span>
+      </div>
+      <div class="entry-sub">Cisco Packet Tracer</div>
+      <ul>
+        <li>Enterprise network across three sites: VLANs, EtherChannel, DHCP, inter-VLAN routing and port security</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// experience</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Crew Member</span>
+        <span class="entry-date">May 2025 – Present</span>
+      </div>
+      <div class="entry-sub">Popeyes Louisiana Chicken, Gallagher Retail Park, Wednesbury</div>
+      <ul>
+        <li>Fast-paced customer service, till operation and food preparation to brand standards</li>
+        <li>Trained new team members on service procedures and till operation</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Temporary Mechanic</span>
+        <span class="entry-date">Jan 2022 – Apr 2022</span>
+      </div>
+      <div class="entry-sub">Dhanoa Garage, Willenhall</div>
+      <ul>
+        <li>Technical diagnostics and component replacement in a professional workshop environment</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Warehouse Operative</span>
+        <span class="entry-date">Sep 2021 – Apr 2022</span>
+      </div>
+      <div class="entry-sub">Yodel, Willenhall</div>
+      <ul>
+        <li>High-volume parcel processing on automated conveyor systems, accurate and reliable throughout</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// education</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">BSc (Hons) Cyber Security</span>
+        <span class="entry-date">2023 – 2026</span>
+      </div>
+      <div class="entry-sub">Birmingham City University</div>
+      <ul>
+        <li><strong style="color:var(--accent)">First Class Honours (74.56%)</strong></li>
+        <li>Modules: network security, ethical hacking, digital forensics, vulnerability management, secure software development, risk assessment</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Infrastructure Technician Level 3</span>
+        <span class="entry-date">2025 – 2026</span>
+      </div>
+      <div class="entry-sub">iMeta, Cohort CIT 19 – Completed</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">HE Diploma – Computer Science</span>
+        <span class="entry-date">2022 – 2023</span>
+      </div>
+      <div class="entry-sub">Walsall College · Pass (60 Credits)</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">City and Guilds Level 3 – Automotive</span>
+        <span class="entry-date">2019 – 2022</span>
+      </div>
+      <div class="entry-sub">Walsall College</div>
+    </div>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// certifications</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-item">Ethical Hacker – Jan 2025</div>
+      <div class="cert-item">Cyber Threat Management – Mar 2025</div>
+      <div class="cert-item">CCNA: Switching, Routing &amp; Wireless – Jan 2025</div>
+      <div class="cert-item">Introduction to Network Analysis – Oct 2025</div>
+      <div class="cert-item">Pre Security Learning Path – Sep 2025</div>
+      <div class="cert-item">CCNAv7: Introduction to Networks</div>
+    </div>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="section">
+    <div class="section-header">
+      <h2>// references</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="refs-grid">
+      <div class="ref-card">
+        <div class="ref-name">Dr Neeranjan</div>
+        <div class="ref-role">Honours Project Supervisor, BCU</div>
+        <div class="ref-contact">07587 757981</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Daniel Mahie</div>
+        <div class="ref-role">Assistant General Manager, Popeyes</div>
+        <div class="ref-contact">07921 559060 · danielmahie@hotmail.co.uk</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Jasprit Sira</div>
+        <div class="ref-role">Subway Worker</div>
+        <div class="ref-contact">07454 251681 · paven.kaur@hotmail.co.uk</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  strawhataza · aryan gupta · <a href="https://github.com/StrawHat-Aza" target="_blank">github.com/StrawHat-Aza</a>
+</footer>
+
+</body>
+</html>
