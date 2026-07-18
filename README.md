@@ -135,4 +135,4 @@ Available on request.
 
 ---
 
-*github.com/StrawHat-Aza*
+*[linkedin](https://www.linkedin.com/in/aryan-gupta-260b72195/)*
