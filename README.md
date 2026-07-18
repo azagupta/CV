@@ -1,6 +1,6 @@
 # Aryan Gupta – Cyber Security Graduate
 
-**First Class BSc (Hons) Cyber Security · Birmingham City University · 74.56% · June 2026**
+**First Class BSc (Hons) Cyber Security · Birmingham City University · June 2026**
 
 📍 Willenhall, West Midlands &nbsp;|&nbsp; 📞 07359 159 353 &nbsp;|&nbsp; ✉️ aryanguptas93@gmail.com &nbsp;|&nbsp; 🔗 [LinkedIn](https://linkedin.com/in/aryan-gupta-260b72195)
 
