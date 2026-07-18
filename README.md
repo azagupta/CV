@@ -37,7 +37,7 @@ Built a fully functional SOC home lab on Vultr cloud infrastructure:
 - TheHive 5.5 via Docker for case management
 - Configured detection rules, log ingestion pipelines and alert use cases from scratch
 
-🔗 [github.com/StrawHat-Aza/soc-home-lab](https://github.com/StrawHat-Aza/soc-home-lab)
+🔗 [github.com/StrawHat-Aza/soc-home-lab]([https://github.com/StrawHat-Aza/soc-home-lab](https://github.com/azagupta/soc-home-lab))
 
 ---
 
